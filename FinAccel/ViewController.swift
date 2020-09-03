@@ -48,6 +48,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         
         tabButton2.setTitle("Packet Data", for: .normal)
         tabButton2.setTitleColor(.black, for: .normal)
+        tabButton2.lineView.isHidden = true
         tabButton2.addTarget(self, action: #selector(changeTableView(sender:)), for: .touchUpInside)
         
         tabButtons.append(tabButton1)
@@ -69,15 +70,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         ///promosLabelV is without contraints in storyboard, that is why we can change its position
         promosLabelV.frame = CGRect(x: 0, y: scrollView2.frame.origin.y - 50, width: fSW, height: 50)
         
-        scrollView1 = UIScrollView(frame: CGRect(x: 0, y: 0, width: fSW, height: viewForSVs.frame.height - promosLabelV.frame.origin.y))
+        scrollView1 = UIScrollView(frame: CGRect(x: 0, y: 0, width: fSW, height: viewForSVs.frame.height - scrollView2.frame.height - 50 - 2))
         viewForSVs.addSubview(scrollView1)
         
         ///Scrollview 1 fillings containing : 2 table views
         tableView1 = UITableView(frame: CGRect(x: 0, y: 0, width: fSW, height: scrollView1.frame.height))
         scrollView1.addSubview(tableView1)
         
+        tableView1.delegate = self
+        tableView1.dataSource = self
+        tableView1.showsVerticalScrollIndicator = false
+        
         tableView2 = UITableView(frame: CGRect(x: fSW, y: 0, width: fSW, height: scrollView1.frame.height))
         scrollView1.addSubview(tableView2)
+        
+        tableView2.delegate = self
+        tableView2.dataSource = self
+        tableView2.showsVerticalScrollIndicator = false
         
         ///Scrollview 2 fillings using : array from 'colors[]'
         let objWidth = fSW * 0.8
@@ -141,8 +150,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             
         }
         
-        
-        
     }
     
     @objc func toPromoPage(sender: UIButton) {
@@ -171,12 +178,52 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableCell()
+        
+        cell.selectionStyle = .none
+        
+        if tableView == tableView1 {
+            cell.headerLabel.text = "Nominal :"
+            cell.valueLabel.text = pulsas[indexPath.row]
+            cell.buyButton.setTitle("Rp \(pulsas[indexPath.row])", for: .normal)
+        }else{
+            cell.headerLabel.text = "Data :"
+            let nextArray = packetDatas[indexPath.row]
+            cell.valueLabel.text = nextArray[0]
+            cell.buyButton.setTitle("Rp \(nextArray[1])", for: .normal)
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(60)
     }
 }
 
 class tableCell : UITableViewCell {
+    var headerLabel, valueLabel : UILabel!
+    var buyButton : UIButton!
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        headerLabel = UILabel(frame: CGRect(x: 20, y: 5, width: 200, height: 25))
+        self.contentView.addSubview(headerLabel)
+        
+        valueLabel = UILabel(frame: CGRect(x: 20, y: 30, width: 200, height: 25))
+        self.contentView.addSubview(valueLabel)
+        
+        buyButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 120, y: 10, width: 100, height: 40))
+        self.contentView.addSubview(buyButton)
+        
+        buyButton.backgroundColor = UIColor.systemBlue
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
 
