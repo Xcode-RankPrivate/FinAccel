@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     @IBOutlet weak var topTabbedView: UIView!
     @IBOutlet weak var mobileImageView: UIImageView!
     @IBOutlet weak var mobileTF: UITextField!
+    @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var viewForSVs: UIView!
     @IBOutlet weak var promosLabelV: UIView!
     
@@ -54,12 +55,25 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         tabButtons.append(tabButton1)
         tabButtons.append(tabButton2)
         
+        mobileImageView.frame = CGRect(x: 20, y: 20, width: 80, height: 80)
+        
         mobileImageView.layer.borderWidth = 2.0
         mobileImageView.layer.borderColor = UIColor.systemBlue.cgColor
         mobileImageView.layer.masksToBounds = true
         mobileImageView.layer.cornerRadius = mobileImageView.frame.height/2
+        mobileImageView.backgroundColor = .gray
+        
+        numberLabel.frame = CGRect(x: 120, y: 20, width: fSW - 120 - 20, height: 35)
+        mobileTF.frame = CGRect(x: 120, y: 55, width: fSW - 120 - 20, height: 40)
         
         mobileTF.delegate = self
+        mobileTF.addTarget(self, action: #selector(textFieldDidChange(sender:)), for: UIControl.Event.editingChanged)
+        
+        if UIScreen.main.bounds.height >= 812 {
+            viewForSVs.frame = CGRect(x: 0, y: 40 + 50 + 60 + 120, width: fSW, height: UIScreen.main.bounds.height - 40 - 50 - 60 - 120 - 34)
+        }else{
+            viewForSVs.frame = CGRect(x: 0, y: 20 + 50 + 60 + 120, width: fSW, height: UIScreen.main.bounds.height - 20 - 50 - 60 - 120)
+        }
         
         scrollView2 = UIScrollView(frame: CGRect(x: 0, y: viewForSVs.frame.height - (fSW * 0.5), width: fSW, height: fSW * 0.5))
         viewForSVs.addSubview(scrollView2)
@@ -72,6 +86,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         
         scrollView1 = UIScrollView(frame: CGRect(x: 0, y: 0, width: fSW, height: viewForSVs.frame.height - scrollView2.frame.height - 50 - 2))
         viewForSVs.addSubview(scrollView1)
+        
+        scrollView1.isHidden = true
         
         ///Scrollview 1 fillings containing : 2 table views
         tableView1 = UITableView(frame: CGRect(x: 0, y: 0, width: fSW, height: scrollView1.frame.height))
@@ -156,11 +172,29 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         print("promo \(sender.backgroundColor)")
     }
     
+    let allowedCharacters = CharacterSet(charactersIn:"0123456789").inverted
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        print(textField.text?.count)
+        let components = string.components(separatedBy: allowedCharacters)
+        let filtered = components.joined(separator: "")
         
-        return true
+        if string == filtered {
+            
+            return true
+
+        } else {
+            
+            return false
+        }
+    }
+    
+    @objc func textFieldDidChange(sender: UITextField) {
+        if sender.text!.count >= 4 {
+            scrollView1.isHidden = false
+        }else{
+            scrollView1.isHidden = true
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -214,10 +248,11 @@ class tableCell : UITableViewCell {
         valueLabel = UILabel(frame: CGRect(x: 20, y: 30, width: 200, height: 25))
         self.contentView.addSubview(valueLabel)
         
-        buyButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 120, y: 10, width: 100, height: 40))
+        buyButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 140, y: 10, width: 120, height: 40))
         self.contentView.addSubview(buyButton)
         
         buyButton.backgroundColor = UIColor.systemBlue
+        buyButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
     }
     
