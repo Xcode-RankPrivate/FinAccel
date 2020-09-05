@@ -227,11 +227,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             cell.buyButton.setTitle("Rp \(nextArray[1])", for: .normal)
         }
         
+        cell.buyButton.addTarget(self, action: #selector(toPurchaseView(sender:)), for: .touchUpInside)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(60)
+    }
+    
+    @objc func toPurchaseView(sender: UIButton) {
+        performSegue(withIdentifier: "segue_purchase", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nvc = segue.destination as! PurchaseViewController
+        nvc.numberToUse = mobileTF.text!
+        nvc.imgToUse = mobileImageView.image
     }
 }
 

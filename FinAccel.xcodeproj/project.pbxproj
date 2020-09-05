@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E4A04D32503709A00AD33EE /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A04D22503709A00AD33EE /* PurchaseViewController.swift */; };
 		8E69A3EF2500D6BD00AD2BDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69A3EE2500D6BD00AD2BDD /* AppDelegate.swift */; };
 		8E69A3F12500D6BD00AD2BDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69A3F02500D6BD00AD2BDD /* SceneDelegate.swift */; };
 		8E69A3F32500D6BD00AD2BDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69A3F22500D6BD00AD2BDD /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E4A04D22503709A00AD33EE /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		8E69A3EB2500D6BD00AD2BDD /* FinAccel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinAccel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E69A3EE2500D6BD00AD2BDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E69A3F02500D6BD00AD2BDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				8E69A3F02500D6BD00AD2BDD /* SceneDelegate.swift */,
 				8E69A3F22500D6BD00AD2BDD /* ViewController.swift */,
 				8E69A3F42500D6BD00AD2BDD /* Main.storyboard */,
+				8E4A04D22503709A00AD33EE /* PurchaseViewController.swift */,
 				8E69A3F72500D6C000AD2BDD /* Assets.xcassets */,
 				8E69A3F92500D6C000AD2BDD /* LaunchScreen.storyboard */,
 				8E69A3FC2500D6C000AD2BDD /* Info.plist */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E69A3F32500D6BD00AD2BDD /* ViewController.swift in Sources */,
+				8E4A04D32503709A00AD33EE /* PurchaseViewController.swift in Sources */,
 				8E69A3EF2500D6BD00AD2BDD /* AppDelegate.swift in Sources */,
 				8E69A3F12500D6BD00AD2BDD /* SceneDelegate.swift in Sources */,
 			);
