@@ -137,6 +137,9 @@
                                 <state key="normal" title="PAY">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="payNow:" destination="vUo-r9-gdh" eventType="touchUpInside" id="NtI-xY-e2i"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-Sx-ElK">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -175,11 +178,72 @@
                         <outlet property="payButton" destination="w2g-VI-h52" id="Udp-gs-5BA"/>
                         <outlet property="scrollview" destination="80d-HP-cqE" id="sBp-sY-Rhn"/>
                         <outlet property="topView" destination="y5A-xM-VfD" id="U02-H8-6cF"/>
+                        <segue destination="cxU-5j-eoi" kind="presentation" identifier="end_segue" modalPresentationStyle="fullScreen" id="ZtM-Ke-7gB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs6-4e-bW1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="964" y="49.925037481259373"/>
+        </scene>
+        <!--Finish Payment View Controller-->
+        <scene sceneID="8c5-32-0vD">
+            <objects>
+                <viewController id="cxU-5j-eoi" customClass="FinishPaymentViewController" customModule="FinAccel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="REz-Iz-fnS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y50-KH-bFD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vMp-zP-Pnq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xP4-Pp-8VG">
+                                <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fYh-DC-DFD"/>
+                                </constraints>
+                                <state key="normal" title="OK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o42-sb-y38">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ZDe-cX-mjV"/>
+                                    <constraint firstAttribute="width" constant="50" id="eiK-iU-t49"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Kp-V6-Owp" firstAttribute="trailing" secondItem="xP4-Pp-8VG" secondAttribute="trailing" id="7tV-5J-ucS"/>
+                            <constraint firstItem="o42-sb-y38" firstAttribute="top" secondItem="6Kp-V6-Owp" secondAttribute="top" id="9cr-Bv-RYE"/>
+                            <constraint firstItem="xP4-Pp-8VG" firstAttribute="bottom" secondItem="6Kp-V6-Owp" secondAttribute="bottom" id="CQ7-gO-dHf"/>
+                            <constraint firstItem="y50-KH-bFD" firstAttribute="trailing" secondItem="6Kp-V6-Owp" secondAttribute="trailing" id="GVP-gr-gQC"/>
+                            <constraint firstItem="xP4-Pp-8VG" firstAttribute="leading" secondItem="6Kp-V6-Owp" secondAttribute="leading" id="R9p-5e-WPH"/>
+                            <constraint firstItem="y50-KH-bFD" firstAttribute="top" secondItem="6Kp-V6-Owp" secondAttribute="top" id="Ysm-Ux-mie"/>
+                            <constraint firstItem="y50-KH-bFD" firstAttribute="leading" secondItem="6Kp-V6-Owp" secondAttribute="leading" id="gyf-Un-MC8"/>
+                            <constraint firstItem="o42-sb-y38" firstAttribute="leading" secondItem="6Kp-V6-Owp" secondAttribute="leading" id="sWK-8Z-iIj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Kp-V6-Owp"/>
+                    </view>
+                    <connections>
+                        <segue destination="7F5-69-T7J" kind="unwind" identifier="unwindFrom_endOfPurchase" unwindAction="returnFromEndOfPurchase:" id="mEo-GD-MCa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X0g-13-pDy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="7F5-69-T7J" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1820.625" y="48.75"/>
         </scene>
     </scenes>
     <resources>

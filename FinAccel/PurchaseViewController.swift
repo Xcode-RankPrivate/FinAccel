@@ -8,12 +8,14 @@
 
 import UIKit
 
-class PurchaseViewController : UIViewController {
+class PurchaseViewController : UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var topView: UILabel!
     @IBOutlet weak var payButton: UIButton!
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var backB: UIButton!
+    
+    var pinTF : UITextField!
     
     var imgToUse : UIImage!
     var numberToUse = ""
@@ -30,7 +32,7 @@ class PurchaseViewController : UIViewController {
             scrollview.frame = CGRect(x: 0, y: 40 + 50, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 50 - 50 - 40 - 34)
         }else{
             //normal 20 points for status bar
-            scrollview.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 50 - 50 - 20)
+            scrollview.frame = CGRect(x: 0, y: 20 + 50, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 50 - 50 - 20)
         }
         
         scrollview.backgroundColor = UIColor.white
@@ -89,6 +91,8 @@ class PurchaseViewController : UIViewController {
         
         scrollview.contentSize = CGSize(width: fSW, height: CGFloat(nextY))
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func setupKredivoPinCard(view: UIView) -> Int {
@@ -115,16 +119,92 @@ class PurchaseViewController : UIViewController {
         
         innerNextY += 30
         
-        let pinTF = UITextField(frame: CGRect(x: 10, y: innerNextY, width: Int(vWidth - 70), height: 40))
+        pinTF = UITextField(frame: CGRect(x: 10, y: innerNextY, width: Int(vWidth - 70), height: 40))
         view.addSubview(pinTF)
         
         pinTF.placeholder = "enter pin here.."
+        pinTF.borderStyle = .none
+        pinTF.delegate = self
         
-        let pinHideB = UIButton(frame: CGRect(x: Int(vWidth - 50), y: innerNextY, width: 40, height: 40))
+        let pinHideB = UIButton(frame: CGRect(x: Int(vWidth - 50), y: innerNextY + 5, width: 30, height: 30))
         view.addSubview(pinHideB)
         
+        pinHideB.setTitle("X", for: .normal)
+        pinHideB.layer.cornerRadius = 5.0
+        pinHideB.setTitleColor(.black, for: .normal)
+        pinHideB.layer.borderColor = UIColor.black.cgColor
+        pinHideB.layer.borderWidth = 1.0
+        pinHideB.addTarget(self, action: #selector(showHidePin), for: .touchUpInside)
+        
+        innerNextY += 40
+        
+        let lastNote = UILabel(frame: CGRect(x: 15, y: innerNextY, width: Int(vWidth - 30), height: 30))
+        view.addSubview(lastNote)
+        
+        lastNote.text = "By continuing, I agree with loan agreement of Kredivo"
+        lastNote.adjustsFontSizeToFitWidth = true
+        
+        let rangeOfColoredString = (lastNote.text! as NSString).range(of: "loan agreement of Kredivo")
+
+        // Create the attributedString.
+        let attributedString = NSMutableAttributedString(string:lastNote.text!)
+        attributedString.setAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue], range: rangeOfColoredString)
+        lastNote.attributedText = attributedString
+        
+        innerNextY += 40
+        
+        view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: vWidth, height: CGFloat(innerNextY))
         
         return innerNextY
+    }
+    
+    @objc func showHidePin() {
+        if pinTF.isSecureTextEntry == true {
+            pinTF.isSecureTextEntry = false
+        }else{
+            pinTF.isSecureTextEntry = true
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        //scrollview.contentOffset = CGPoint(x: 0, y: 0)
+        
+        return true
+    }
+    
+    let allowedCharacters = CharacterSet(charactersIn:"0123456789").inverted
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let components = string.components(separatedBy: allowedCharacters)
+        let filtered = components.joined(separator: "")
+        
+        if string == filtered {
+            
+            return true
+
+        } else {
+            
+            return false
+        }
+    }
+    
+    @objc func keyboardWillShow(notification:NSNotification){
+
+        let userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.scrollview.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        scrollview.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification){
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollview.contentInset = contentInset
     }
     
     func setupPaymentDetailsCard(view: UIView) -> Int {
@@ -150,7 +230,7 @@ class PurchaseViewController : UIViewController {
         itemsL.numberOfLines = 0
         itemsL.sizeToFit()
         
-        let itemsPriceL = UILabel(frame: CGRect(x: Int(vWidth/2), y: innerNextY, width: Int(vWidth - 10), height: 60))
+        let itemsPriceL = UILabel(frame: CGRect(x: Int(vWidth/3 * 2), y: innerNextY, width: Int(vWidth/3 - 10), height: 60))
         view.addSubview(itemsPriceL)
         
         itemsPriceL.text = "Rp 500.000"
@@ -165,7 +245,7 @@ class PurchaseViewController : UIViewController {
         adminL.text = "Admin Fee"
         adminL.sizeToFit()
         
-        let adminFeeL = UILabel(frame: CGRect(x: Int(vWidth/2), y: innerNextY, width: Int(vWidth - 10), height: 30))
+        let adminFeeL = UILabel(frame: CGRect(x: Int(vWidth/3 * 2), y: innerNextY, width: Int(vWidth/3 - 10), height: 30))
         view.addSubview(adminFeeL)
         
         adminFeeL.text = "Rp 0"
@@ -187,7 +267,7 @@ class PurchaseViewController : UIViewController {
         daysL.text = "Pay in 30 days"
         daysL.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         
-        let totalPayL = UILabel(frame: CGRect(x: Int(vWidth/2), y: innerNextY, width: Int(vWidth/2 - 10), height: 30))
+        let totalPayL = UILabel(frame: CGRect(x: Int(vWidth/3 * 2), y: innerNextY, width: Int(vWidth/3 - 10), height: 30))
         view.addSubview(totalPayL)
         
         totalPayL.text = "Rp 500.000"
@@ -204,6 +284,18 @@ class PurchaseViewController : UIViewController {
     
     @IBAction func backNow(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func payNow(_ sender: Any) {
+        
+        if pinTF.text!.count == 0 {
+            let alert = UIAlertController(title: "Warning", message: "PIN is missing.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }else{
+            performSegue(withIdentifier: "end_segue", sender: self)
+        }
+        
     }
     
 }

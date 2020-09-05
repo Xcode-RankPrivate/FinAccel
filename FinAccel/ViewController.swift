@@ -245,6 +245,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         nvc.numberToUse = mobileTF.text!
         nvc.imgToUse = mobileImageView.image
     }
+    
+    @IBAction func returnFromEndOfPurchase(_ segue: UIStoryboardSegue) {
+        
+    }
 }
 
 class tableCell : UITableViewCell {
