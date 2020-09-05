@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     
     var promosObjStart : CGFloat = 0
     var promosItemWidth : CGFloat = 0
+    var priceToSend = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,7 +170,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     
     @objc func toPromoPage(sender: UIButton) {
-        print("promo \(sender.backgroundColor)")
+        performSegue(withIdentifier: "to_promo_detail", sender: self)
     }
     
     let allowedCharacters = CharacterSet(charactersIn:"0123456789").inverted
@@ -237,13 +238,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     
     @objc func toPurchaseView(sender: UIButton) {
+        priceToSend = sender.titleLabel!.text!
         performSegue(withIdentifier: "segue_purchase", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nvc = segue.destination as! PurchaseViewController
-        nvc.numberToUse = mobileTF.text!
-        nvc.imgToUse = mobileImageView.image
+        
+        if segue.identifier == "segue_purchase" {
+            
+            let nvc = segue.destination as! PurchaseViewController
+            nvc.numberToUse = mobileTF.text!
+            nvc.imgToUse = mobileImageView.image
+            nvc.priceToUse = priceToSend
+            
+        }else if segue.identifier == "to_promo_detail" {
+            
+        }
     }
     
     @IBAction func returnFromEndOfPurchase(_ segue: UIStoryboardSegue) {

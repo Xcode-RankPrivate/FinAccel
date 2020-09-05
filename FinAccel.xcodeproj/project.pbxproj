@@ -15,6 +15,7 @@
 		8E69A3F62500D6BD00AD2BDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E69A3F42500D6BD00AD2BDD /* Main.storyboard */; };
 		8E69A3F82500D6C000AD2BDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E69A3F72500D6C000AD2BDD /* Assets.xcassets */; };
 		8E69A3FB2500D6C000AD2BDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E69A3F92500D6C000AD2BDD /* LaunchScreen.storyboard */; };
+		8EEAAA292503B5B700492DC9 /* PromoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAAA282503B5B700492DC9 /* PromoDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8E69A3F72500D6C000AD2BDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E69A3FA2500D6C000AD2BDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E69A3FC2500D6C000AD2BDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EEAAA282503B5B700492DC9 /* PromoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				8E69A3F02500D6BD00AD2BDD /* SceneDelegate.swift */,
 				8E69A3F22500D6BD00AD2BDD /* ViewController.swift */,
 				8E69A3F42500D6BD00AD2BDD /* Main.storyboard */,
+				8EEAAA282503B5B700492DC9 /* PromoDetailViewController.swift */,
 				8E4A04D22503709A00AD33EE /* PurchaseViewController.swift */,
 				8E69A3F72500D6C000AD2BDD /* Assets.xcassets */,
 				8E69A3F92500D6C000AD2BDD /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 				8E2807D42503A53400B40F0A /* FinishPaymentViewController.swift in Sources */,
 				8E69A3F32500D6BD00AD2BDD /* ViewController.swift in Sources */,
 				8E4A04D32503709A00AD33EE /* PurchaseViewController.swift in Sources */,
+				8EEAAA292503B5B700492DC9 /* PromoDetailViewController.swift in Sources */,
 				8E69A3EF2500D6BD00AD2BDD /* AppDelegate.swift in Sources */,
 				8E69A3F12500D6BD00AD2BDD /* SceneDelegate.swift in Sources */,
 			);

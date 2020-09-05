@@ -104,6 +104,7 @@
                         <outlet property="topTabbedView" destination="SbD-gA-YO4" id="wf7-Ga-A7w"/>
                         <outlet property="viewForSVs" destination="VCP-YO-wo4" id="xIw-op-JhP"/>
                         <segue destination="vUo-r9-gdh" kind="presentation" identifier="segue_purchase" modalPresentationStyle="fullScreen" id="SiW-iY-m6t"/>
+                        <segue destination="UtR-IR-2D4" kind="presentation" identifier="to_promo_detail" modalPresentationStyle="fullScreen" id="amt-nv-cAZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -185,6 +186,52 @@
             </objects>
             <point key="canvasLocation" x="964" y="49.925037481259373"/>
         </scene>
+        <!--Promo Detail View Controller-->
+        <scene sceneID="ij8-ce-5x3">
+            <objects>
+                <viewController id="UtR-IR-2D4" customClass="PromoDetailViewController" customModule="FinAccel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bvu-zd-77h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Merchant Promo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzU-PQ-JN0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="c7W-IG-lFw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zt-H5-cgz">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Bu3-VK-L1R"/>
+                                    <constraint firstAttribute="width" constant="50" id="QHp-a4-sMX"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="returnNow:" destination="UtR-IR-2D4" eventType="touchUpInside" id="koA-Pn-BHb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PzU-PQ-JN0" firstAttribute="leading" secondItem="HKr-qf-AOW" secondAttribute="leading" id="03l-NF-Ixo"/>
+                            <constraint firstItem="0zt-H5-cgz" firstAttribute="top" secondItem="HKr-qf-AOW" secondAttribute="top" id="HV6-Am-1eK"/>
+                            <constraint firstItem="HKr-qf-AOW" firstAttribute="trailing" secondItem="PzU-PQ-JN0" secondAttribute="trailing" id="MHM-iV-dPX"/>
+                            <constraint firstItem="PzU-PQ-JN0" firstAttribute="top" secondItem="HKr-qf-AOW" secondAttribute="top" id="NcQ-9K-J4I"/>
+                            <constraint firstItem="0zt-H5-cgz" firstAttribute="leading" secondItem="HKr-qf-AOW" secondAttribute="leading" id="eC7-6S-i52"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HKr-qf-AOW"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E25-qR-IQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885" y="820"/>
+        </scene>
         <!--Finish Payment View Controller-->
         <scene sceneID="8c5-32-0vD">
             <objects>
@@ -212,6 +259,9 @@
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="okDone:" destination="cxU-5j-eoi" eventType="touchUpInside" id="kWP-73-OJt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o42-sb-y38">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -221,6 +271,9 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="closeDone:" destination="cxU-5j-eoi" eventType="touchUpInside" id="nUQ-lz-kBq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -247,6 +300,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="xmark" catalog="system" width="64" height="56"/>
+        <image name="xmark" catalog="system" width="32" height="32"/>
     </resources>
 </document>

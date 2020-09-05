@@ -19,6 +19,7 @@ class PurchaseViewController : UIViewController, UITextFieldDelegate {
     
     var imgToUse : UIImage!
     var numberToUse = ""
+    var priceToUse = ""
     
     let fSW = UIScreen.main.bounds.width
     
@@ -233,7 +234,7 @@ class PurchaseViewController : UIViewController, UITextFieldDelegate {
         let itemsPriceL = UILabel(frame: CGRect(x: Int(vWidth/3 * 2), y: innerNextY, width: Int(vWidth/3 - 10), height: 60))
         view.addSubview(itemsPriceL)
         
-        itemsPriceL.text = "Rp 500.000"
+        itemsPriceL.text = priceToUse
         itemsPriceL.textAlignment = .right
         itemsPriceL.sizeToFit()
         
@@ -270,7 +271,7 @@ class PurchaseViewController : UIViewController, UITextFieldDelegate {
         let totalPayL = UILabel(frame: CGRect(x: Int(vWidth/3 * 2), y: innerNextY, width: Int(vWidth/3 - 10), height: 30))
         view.addSubview(totalPayL)
         
-        totalPayL.text = "Rp 500.000"
+        totalPayL.text = priceToUse
         totalPayL.textColor = .systemOrange
         totalPayL.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         
@@ -294,6 +295,17 @@ class PurchaseViewController : UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
         }else{
             performSegue(withIdentifier: "end_segue", sender: self)
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "end_segue" {
+            let nvc = segue.destination as! FinishPaymentViewController
+            nvc.imgToShow = imgToUse
+            nvc.numberToShow = numberToUse
+            nvc.priceToShow = priceToUse
         }
         
     }
